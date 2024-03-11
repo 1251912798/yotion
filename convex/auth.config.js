@@ -2,7 +2,7 @@ export default {
   providers: [
     {
       domain:
-        'https://crucial-dogfish-46.clerk.accounts.dev',
+        'https://resolved-vulture-61.clerk.accounts.dev',
       applicationID: 'convex',
     },
   ],

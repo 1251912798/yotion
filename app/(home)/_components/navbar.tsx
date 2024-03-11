@@ -56,9 +56,9 @@ const Navbar = () => {
                 进入 Yotion
               </Link>
             </Button>
-            <UserButton afterSignOutUrl="/" />
           </>
         )}
+        <UserButton afterSignOutUrl="/" />
         <ModeToggle />
       </div>
     </div>
