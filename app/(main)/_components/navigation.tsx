@@ -1,6 +1,13 @@
 'use client';
 
-import { ChevronLeft, MenuIcon } from 'lucide-react';
+import {
+  ChevronLeft,
+  MenuIcon,
+  PlusCircle,
+  Search,
+  Settings,
+  Trash,
+} from 'lucide-react';
 import { usePathname } from 'next/navigation';
 import {
   ElementRef,
@@ -9,9 +16,26 @@ import {
   useState,
 } from 'react';
 import { useMediaQuery } from 'usehooks-ts';
+import { useMutation, useQuery } from 'convex/react';
+import { toast } from 'sonner';
+
 import { cn } from '@/lib/utils';
+import { api } from '@/convex/_generated/api';
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '@/components/ui/popover';
+
+import UserItem from './userItem';
+import Item from './item';
+import DocumentList from './documentList';
+import TrashBox from './trashBox';
 
 const Navigation = () => {
+  const documents = useQuery(api.documents.get);
+  const create = useMutation(api.documents.create);
+
   const pathname = usePathname();
   // 检测是否为手机
   const isMobile = useMediaQuery('(max-width:768px)');
@@ -28,6 +52,7 @@ const Navigation = () => {
     } else {
       restWidth();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isMobile]);
 
   useEffect(() => {
@@ -35,6 +60,17 @@ const Navigation = () => {
       collapse();
     }
   }, [pathname, isMobile]);
+
+  // 创建笔记
+  const handleCrerte = () => {
+    const promise = create({ title: '未命名标题' });
+
+    toast.promise(promise, {
+      loading: '正在创建笔记...',
+      success: '创建笔记成功!',
+      error: '创建笔记失败.',
+    });
+  };
 
   // 鼠标按下
   const handleMouseDown = (
@@ -141,10 +177,41 @@ const Navigation = () => {
           <ChevronLeft className="w-6 h-6" />
         </div>
         <div>
-          <p>Aciton</p>
+          <UserItem />
+          <Item
+            onClick={handleCrerte}
+            label="创建文档"
+            icon={PlusCircle}
+          />
+          <Item
+            label="搜索"
+            icon={Search}
+            onClick={() => {}}
+            isSearch
+          />
+          <Item
+            label="设置"
+            icon={Settings}
+            onClick={() => {}}
+          />
         </div>
         <div className="mt-4">
-          <p>Document</p>
+          <DocumentList />
+          <Item
+            label="创建文档"
+            onClick={handleCrerte}
+            icon={PlusCircle}
+          />
+          <Popover>
+            <PopoverTrigger className="w-full mt-4">
+              <Item label="回收站" icon={Trash}></Item>
+            </PopoverTrigger>
+            <PopoverContent
+              side={isMobile ? 'bottom' : 'right'}
+            >
+              <TrashBox />
+            </PopoverContent>
+          </Popover>
         </div>
         <div
           onMouseDown={handleMouseDown}
