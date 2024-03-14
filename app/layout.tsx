@@ -1,10 +1,12 @@
 import { Toaster } from 'sonner';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
+
 import { ThemeProvider } from '@/components/provider/theme-provider';
+import { ClerkClientProvider } from '@/components/provider/convex.provider';
+import ModalProvider from '@/components/provider/modalProvider';
 
 import './globals.css';
-import { ClerkClientProvider } from '@/components/provider/convex.provider';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -46,6 +48,7 @@ export default function RootLayout({
             storageKey="yotion-thenme"
           >
             <Toaster position="bottom-center" />
+            <ModalProvider />
             {children}
           </ThemeProvider>
         </ClerkClientProvider>

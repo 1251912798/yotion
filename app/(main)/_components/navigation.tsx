@@ -32,11 +32,12 @@ import Item from './item';
 import DocumentList from './documentList';
 import TrashBox from './trashBox';
 import { useSearch } from '@/hooks/useSearchContext';
+import { useSettings } from '@/hooks/useSettings';
 
 const Navigation = () => {
-  const documents = useQuery(api.documents.get);
   const create = useMutation(api.documents.create);
   const search = useSearch();
+  const settings = useSettings();
 
   const pathname = usePathname();
   // 检测是否为手机
@@ -196,7 +197,7 @@ const Navigation = () => {
           <Item
             label="设置"
             icon={Settings}
-            onClick={() => {}}
+            onClick={settings.onOpen}
           />
         </div>
         <div className="mt-4">
