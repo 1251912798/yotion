@@ -31,10 +31,12 @@ import UserItem from './userItem';
 import Item from './item';
 import DocumentList from './documentList';
 import TrashBox from './trashBox';
+import { useSearch } from '@/hooks/useSearchContext';
 
 const Navigation = () => {
   const documents = useQuery(api.documents.get);
   const create = useMutation(api.documents.create);
+  const search = useSearch();
 
   const pathname = usePathname();
   // 检测是否为手机
@@ -179,16 +181,18 @@ const Navigation = () => {
         <div>
           <UserItem />
           <Item
+            label="搜索"
+            icon={Search}
+            onClick={search.onOpen}
+            isSearch
+          />
+
+          <Item
             onClick={handleCrerte}
             label="创建文档"
             icon={PlusCircle}
           />
-          <Item
-            label="搜索"
-            icon={Search}
-            onClick={() => {}}
-            isSearch
-          />
+
           <Item
             label="设置"
             icon={Settings}
