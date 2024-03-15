@@ -8,7 +8,7 @@ import {
   Settings,
   Trash,
 } from 'lucide-react';
-import { usePathname } from 'next/navigation';
+import { useParams, usePathname } from 'next/navigation';
 import {
   ElementRef,
   useEffect,
@@ -29,12 +29,14 @@ import {
 
 import UserItem from './userItem';
 import Item from './item';
+import Navbar from './navbar';
 import DocumentList from './documentList';
 import TrashBox from './trashBox';
 import { useSearch } from '@/hooks/useSearchContext';
 import { useSettings } from '@/hooks/useSettings';
 
 const Navigation = () => {
+  const params = useParams();
   const create = useMutation(api.documents.create);
   const search = useSearch();
   const settings = useSettings();
@@ -236,15 +238,22 @@ const Navigation = () => {
           isMobile && 'left-0 w-full'
         )}
       >
-        <nav>
-          {isCollapsed && (
-            <MenuIcon
-              onClick={restWidth}
-              role="button"
-              className="h-6 w-6 text-muted-foreground"
-            />
-          )}
-        </nav>
+        {!!params.documentId ? (
+          <Navbar
+            isCollapsed={isCollapsed}
+            onResetWidth={restWidth}
+          />
+        ) : (
+          <nav>
+            {isCollapsed && (
+              <MenuIcon
+                onClick={restWidth}
+                role="button"
+                className="h-6 w-6 text-muted-foreground"
+              />
+            )}
+          </nav>
+        )}
       </div>
     </>
   );

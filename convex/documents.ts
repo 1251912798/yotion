@@ -241,3 +241,72 @@ export const getSearch = query({
     return documents;
   },
 });
+
+// 文档查询
+export const getDocumentById = query({
+  args: { documentId: v.id('documents') },
+  handler: async (ctx, args) => {
+    const identity = await ctx.auth.getUserIdentity();
+
+    const document = await ctx.db.get(args.documentId);
+
+    if (!document) {
+      throw new Error('文档不存在');
+    }
+
+    if (document.isPublished && !document.isArchived) {
+      return document;
+    }
+
+    if (!identity) {
+      throw new Error('未登录');
+    }
+
+    const userId = identity.subject;
+
+    if (document.userId !== userId) {
+      throw new Error('未经授权');
+    }
+
+    return document;
+  },
+});
+
+// 文档更新
+export const update = mutation({
+  args: {
+    id: v.id('documents'),
+    title: v.optional(v.string()),
+    content: v.optional(v.string()),
+    coverImage: v.optional(v.string()),
+    icon: v.optional(v.string()),
+    isPublished: v.optional(v.boolean()),
+  },
+  handler: async (ctx, args) => {
+    const identity = await ctx.auth.getUserIdentity();
+
+    if (!identity) {
+      throw new Error('未登录');
+    }
+
+    const userId = identity.subject;
+
+    const { id, ...rest } = args;
+
+    const existingDocument = await ctx.db.get(args.id);
+
+    if (!existingDocument) {
+      throw new Error('文档不存在');
+    }
+
+    if (existingDocument.userId !== userId) {
+      throw new Error('未经授权');
+    }
+
+    const document = await ctx.db.patch(args.id, {
+      ...rest,
+    });
+
+    return document;
+  },
+});
