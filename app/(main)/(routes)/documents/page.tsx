@@ -8,14 +8,18 @@ import Image from 'next/image';
 
 import { api } from '@/convex/_generated/api';
 import { toast } from 'sonner';
+import { useRouter } from 'next/navigation';
 
 const DocumentsPage = () => {
+  const router = useRouter();
   const { user } = useUser();
   const create = useMutation(api.documents.create);
 
   // 创建笔记
   const onCreate = () => {
-    const promise = create({ title: '未命名标题' });
+    const promise = create({ title: '未命名标题' }).then(
+      documentId => router.push(`/documents/${documentId}`)
+    );
 
     toast.promise(promise, {
       loading: '创建笔记中...',

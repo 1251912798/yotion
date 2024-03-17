@@ -5,6 +5,7 @@ import { Inter } from 'next/font/google';
 import { ThemeProvider } from '@/components/provider/theme-provider';
 import { ClerkClientProvider } from '@/components/provider/convex.provider';
 import ModalProvider from '@/components/provider/modalProvider';
+import { EdgeStoreProvider } from '@/lib/edgestore';
 
 import './globals.css';
 
@@ -40,17 +41,19 @@ export default function RootLayout({
       <body className={inter.className}>
         {/* 主题 */}
         <ClerkClientProvider>
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-            storageKey="yotion-thenme"
-          >
-            <Toaster position="bottom-center" />
-            <ModalProvider />
-            {children}
-          </ThemeProvider>
+          <EdgeStoreProvider>
+            <ThemeProvider
+              attribute="class"
+              defaultTheme="system"
+              enableSystem
+              disableTransitionOnChange
+              storageKey="yotion-thenme"
+            >
+              <Toaster position="bottom-center" />
+              <ModalProvider />
+              {children}
+            </ThemeProvider>
+          </EdgeStoreProvider>
         </ClerkClientProvider>
       </body>
     </html>

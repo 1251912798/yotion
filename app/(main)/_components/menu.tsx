@@ -30,7 +30,9 @@ const Menu = ({ documentId }: MenuProps) => {
   const archive = useMutation(api.documents.archive);
 
   const onArchive = () => {
-    const promise = archive({ id: documentId });
+    const promise = archive({ id: documentId }).then(() =>
+      router.push(`/documents`)
+    );
 
     toast.promise(promise, {
       loading: '移动至回收站...',

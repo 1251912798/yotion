@@ -8,7 +8,11 @@ import {
   Settings,
   Trash,
 } from 'lucide-react';
-import { useParams, usePathname } from 'next/navigation';
+import {
+  useParams,
+  usePathname,
+  useRouter,
+} from 'next/navigation';
 import {
   ElementRef,
   useEffect,
@@ -37,6 +41,7 @@ import { useSettings } from '@/hooks/useSettings';
 
 const Navigation = () => {
   const params = useParams();
+  const router = useRouter();
   const create = useMutation(api.documents.create);
   const search = useSearch();
   const settings = useSettings();
@@ -68,7 +73,9 @@ const Navigation = () => {
 
   // 创建笔记
   const handleCrerte = () => {
-    const promise = create({ title: '未命名标题' });
+    const promise = create({ title: '未命名标题' }).then(
+      documentId => router.push(`/documents/${documentId}`)
+    );
 
     toast.promise(promise, {
       loading: '正在创建笔记...',

@@ -340,3 +340,33 @@ export const removeIcon = mutation({
     return document;
   },
 });
+
+// 删除封面
+export const reomveCoverImage = mutation({
+  args: { id: v.id('documents') },
+  handler: async (ctx, args) => {
+    const identity = await ctx.auth.getUserIdentity();
+
+    if (!identity) {
+      throw new Error('未登录');
+    }
+
+    const userId = identity.subject;
+
+    const existingDocument = await ctx.db.get(args.id);
+
+    if (!existingDocument) {
+      throw new Error('文档不存在');
+    }
+
+    if (existingDocument.userId !== userId) {
+      throw new Error('未经授权');
+    }
+
+    const document = await ctx.db.patch(args.id, {
+      coverImage: undefined,
+    });
+
+    return document;
+  },
+});

@@ -10,6 +10,7 @@ import IconPicker from './iconPicker';
 import { Button } from './ui/button';
 
 import type { ElementRef } from 'react';
+import { useCoverImage } from '@/hooks/useCoverImage';
 
 interface ToolbarProps {
   initialData: Doc<'documents'>;
@@ -24,9 +25,12 @@ const Toolbar = ({
   const [isEditing, setIsEditing] = useState(false);
   const [value, setValue] = useState(initialData.title);
 
+  const coverImage = useCoverImage();
+
   const update = useMutation(api.documents.update);
   const removeIcon = useMutation(api.documents.removeIcon);
 
+  // 开启编辑标题
   const enableInput = () => {
     if (preview) return;
 
@@ -37,8 +41,10 @@ const Toolbar = ({
     }, 0);
   };
 
+  // 失焦关闭编辑标题
   const disableInput = () => setIsEditing(false);
 
+  // 输入标题
   const onInput = (value: string) => {
     setValue(value);
     update({
@@ -47,6 +53,7 @@ const Toolbar = ({
     });
   };
 
+  // 回车关闭编辑标题
   const onKeyDown = (event: React.KeyboardEvent) => {
     if (event.key === 'Enter') {
       event.preventDefault();
@@ -54,6 +61,7 @@ const Toolbar = ({
     }
   };
 
+  // 选择图标
   const onIconSelect = (icon: string) => {
     update({
       id: initialData._id,
@@ -61,6 +69,7 @@ const Toolbar = ({
     });
   };
 
+  // 删除图标
   const onRemoveIcon = () => {
     removeIcon({ id: initialData._id });
   };
@@ -104,13 +113,13 @@ const Toolbar = ({
         )}
         {!initialData.coverImage && !preview && (
           <Button
-            onClick={() => {}}
+            onClick={coverImage.onOpen}
             size="sm"
             className="text-muted-foreground text-xs"
             variant="outline"
           >
             <ImageIcon className="w-4 h-4 mr-2" />
-            更换封面
+            添加封面
           </Button>
         )}
       </div>

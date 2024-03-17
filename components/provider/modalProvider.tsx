@@ -1,7 +1,9 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+
 import SettingsModal from '../modals/settingsModal';
+import CoverImageModal from '../modals/coverImageModal';
 
 const ModalProvider = () => {
   const [isMounted, serIsMounted] = useState(false);
@@ -17,6 +19,7 @@ const ModalProvider = () => {
   return (
     <>
       <SettingsModal />
+      <CoverImageModal />
     </>
   );
 };
