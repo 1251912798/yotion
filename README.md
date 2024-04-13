@@ -1,6 +1,5 @@
 
-## <div style="text-align: center;">Yotion</div>
----
+## <div align=center>Yotion</div>
 <div align=center>
 <p >
 
