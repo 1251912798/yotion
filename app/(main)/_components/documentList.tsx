@@ -2,7 +2,7 @@
 
 import { useQuery } from 'convex/react';
 import { useParams, useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useState, memo, useEffect } from 'react';
 import { FileIcon } from 'lucide-react';
 
 import { cn } from '@/lib/utils';
@@ -27,10 +27,12 @@ const DocumentList = ({
     Record<string, boolean>
   >({});
 
+  // 获取笔记
   const documents = useQuery(api.documents.getSidebar, {
     parentDocument: parentDocumentId,
   });
 
+  // 点击展开或收起
   const onExpand = (documentId: string) => {
     setExpanded(prevExpanded => ({
       ...prevExpanded,
@@ -101,4 +103,4 @@ const DocumentList = ({
   );
 };
 
-export default DocumentList;
+export default memo(DocumentList);

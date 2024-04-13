@@ -1,4 +1,5 @@
-# yotion
+## <div style="text-align: center;">Yotion</div>
+<hr />
 
 ```js
   npm run dev

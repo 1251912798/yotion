@@ -18,6 +18,8 @@ import {
   useEffect,
   useRef,
   useState,
+  Profiler,
+  useMemo,
 } from 'react';
 import { useMediaQuery } from 'usehooks-ts';
 import { useMutation, useQuery } from 'convex/react';
@@ -120,6 +122,18 @@ const Navigation = () => {
     }
   };
 
+  const onRender = (
+    id: any,
+    phase: any,
+    actualDuration: any,
+    baseDuration: any,
+    startTime: any,
+    commitTime: any,
+    interactions: any
+  ) => {
+    console.log(1);
+  };
+
   // 鼠标抬起
   const handleMouseUp = () => {
     isResizingRef.current = false;
@@ -210,7 +224,10 @@ const Navigation = () => {
           />
         </div>
         <div className="mt-4">
-          <DocumentList />
+          <Profiler id="DocList" onRender={onRender}>
+            <DocumentList />
+          </Profiler>
+
           <Item
             label="创建文档"
             onClick={handleCrerte}

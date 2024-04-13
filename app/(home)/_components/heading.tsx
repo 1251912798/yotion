@@ -2,10 +2,10 @@
 
 import Link from 'next/link';
 import { useConvexAuth } from 'convex/react';
-import { Button } from '@/components/ui/button';
 import { ArrowRight } from 'lucide-react';
 import { SignInButton } from '@clerk/clerk-react';
 
+import { Button } from '@/components/ui/button';
 import { Spinner } from '@/components/spinner';
 
 const Heading = () => {

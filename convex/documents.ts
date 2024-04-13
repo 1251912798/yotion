@@ -72,6 +72,7 @@ export const getSidebar = query({
       .filter(q => q.eq(q.field('isArchived'), false))
       .order('desc')
       .collect();
+
     return document;
   },
 });
