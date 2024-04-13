@@ -4,11 +4,15 @@
 <p >
 
  ![Next](https://img.shields.io/badge/-Next\.js-282c34?logo=Next\.js) ![React](https://img.shields.io/badge/-React-282c34?logo=react) ![TypeScript](https://img.shields.io/badge/-TypeScript-blue?logo=typescript&logoColor=white) ![Tailwind CSS](https://img.shields.io/badge/-Tailwind%20CSS-Tailwind%20CSS?logo=Tailwind%20CSS&logoColor=white&labelColor=%2306B6D4&color=%2306B6D4)
-![Vercel](https://img.shields.io/badge/-Vercel-Vercel?logo=Vercel&logoColor=white&labelColor=%23000000&color=%23000000) ![Static Badge](https://img.shields.io/badge/-Clerk-Clerk?logo=Clerk&logoColor=white&labelColor=%236C47FF&color=%236C47FF)
-
-
 
 </p>
+
+<p>
+
+![Vercel](https://img.shields.io/badge/-Vercel-Vercel?logo=Vercel&logoColor=white&labelColor=%23000000&color=%23000000) ![Static Badge](https://img.shields.io/badge/-Clerk-Clerk?logo=Clerk&logoColor=white&labelColor=%236C47FF&color=%236C47FF)
+
+</p>
+
 </div>
 
 Yotion是一款专注于高效笔记和文档管理的轻量级应用程序。旨在为用户提供一个简洁、直观的界面，Yotion使用户能够轻松创建、编辑和组织他们的笔记和文档。文档可以保存在云端，方便随时随地访问，并支持与他人共享，提高个人工作的效率。
