@@ -1,5 +1,5 @@
 
-## <div align=center>Yotion</div>
+# <div align=center>Yotion</div>
 <div align=center>
 <p >
 
@@ -19,19 +19,19 @@ Yotion是一款专注于高效笔记和文档管理的轻量级应用程序。�
 
 [在线Demo](https://yinp.cc/)
 
-### <div style='padding:8px 0; border-bottom:2px solid #eee'>✨特性</div>
+## ✨特性
 - 🌓暗黑模式
 - 📱响应式能力
 - :globe_with_meridians:笔记公开发布
 - 🔒支持第三方登陆
 - 📋Markdown语法支持
 - 💎优雅美观
-### <div style='padding:8px 0; border-bottom:2px solid #eee'>🖼️预览图</div>
+## <div style='padding:8px 0; border-bottom:2px solid #eee'>🖼️预览图</div>
 ![alt text](./public/yulan1.png)
 
 ![alt text](./public/yulan2.png)
 
-### <div style='padding:8px 0; border-bottom:2px solid #eee'>🎈使用</div>
+## 🎈使用
 
 [Convex](https://www.convex.dev/)
 [Convex配置官方文档](https://docs.convex.dev/quickstart/nextjs)
@@ -42,7 +42,7 @@ npm run dev
 npx convex dev
 ```
 
-### <div style='padding:8px 0; border-bottom:2px solid #eee'>🛜部署</div>
+## 🛜部署
 
 [Vercel官方网站]()
 [Convex使用Vercel部署](https://docs.convex.dev/production/hosting/vercel)
